@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { CacheInterceptor, CacheModule, CacheModuleOptions } from '@nestjs/cache-manager';
 import { redisStore } from 'cache-manager-redis-yet';
 import { StudentModule } from './student/student.module';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { StudentModule } from './student/student.module';
         isGlobal: true, 
     }),
     StudentModule,
+    MongooseModule.forRoot('"mongodb+srv://Juan:juan@cluster01.jh82oxj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster01')
     
   ],
   controllers: [AppController],
