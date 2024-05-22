@@ -1,5 +1,14 @@
 # **Proyecto SID II**
 
+### **Modelo MongoDB**
+  - **Ciudad y Lugar**: Decidimos embeber estos dos objetos en las colecciones necesarias, pues cada documento de estas colecciones posee solo un objeto de Ciudad y/o Lugar (muy poca cantidad), el cual es prácticamente definitivo, por lo que no se editará en un futuro.
+  
+  - **Personas**: Analizando vimos que tanto los asistentes como los conferencistas poseen los mismos atributos. Por tanto, creemos que la mejor solución es crear una sola colección para ambas y que la distinción de entre si es un conferencista o un asistente sea definida por la colección de 'Eventos' (con array de referencia a asistentes y con array de referencia a conferencistas).
+
+  - **Eventos**: Decidimos que 'asistentes' y 'conferencistas' sean un array (por separado) de Foreign Keys que hacen referencia a documentos de la colección 'Personas', pues pueden llegar a ser muchos asistentes y/o conferencistas, los cuales pueden sufrir distintas modificaciones. Por otro lado, 'facultades_organizadoras' son un array de Foreign Keys, ya que hacen referencia a los objetos de la tabla 'Facultades'.
+
+  - **Comentarios**: Decidimos crear una colección propia de comentarios, pues cada uno de estos documentos se relaciona con un documento de 'Personas' y con un documento de 'Eventos'. Así pues, por esa misma razón, 'Comentarios' posee una Foreign Key que referencia tanto al documento de 'Personas' como al de 'Eventos'.
+
 ### **BD Relacional**
 Realizamos la base de datos relacional en Oracle, a través de SQLDeveloper, utilizando los usuarios (P09779_1_2) y el nombre del servicio (ESTUD) dados. Así, fue necesario modificar los scripts de creación de tablas y de inserción, pues Oracle crea un esquema automático para cada usuario (cuyo nombre es el nombre del usuario):
 
