@@ -1,6 +1,6 @@
 # **Proyecto SID II**
 
-### **Modelo MongoDB**
+### **MongoDB - BD No Relacional**
   - **Ciudad y Lugar**: Decidimos embeber estos dos objetos en las colecciones necesarias, pues cada documento de estas colecciones posee solo un objeto de Ciudad y/o Lugar (muy poca cantidad), el cual es prácticamente definitivo, por lo que no se editará en un futuro.
   
   - **Personas**: Analizando vimos que tanto los asistentes como los conferencistas poseen los mismos atributos. Por tanto, creemos que la mejor solución es crear una sola colección para ambas y que la distinción de entre si es un conferencista o un asistente sea definida por la colección de 'Eventos' (con array de referencia a asistentes y con array de referencia a conferencistas).
@@ -11,7 +11,7 @@
 
   ![Schema MongoDB](https://github.com/JuanJoseLL/sid-project/raw/relational%26norelational-db/doc/schemas/mongodb/schemamongodb.png)
 
-### **BD Relacional**
+### **Oracle - BD Relacional**
 Realizamos la base de datos relacional en Oracle, a través de SQLDeveloper, utilizando los usuarios (P09779_1_2) y el nombre del servicio (ESTUD) dados. Así, fue necesario modificar los scripts de creación de tablas y de inserción, pues Oracle crea un esquema automático para cada usuario (cuyo nombre es el nombre del usuario):
 
 - **Creación**
@@ -26,12 +26,13 @@ Realizamos la base de datos relacional en Oracle, a través de SQLDeveloper, uti
     id_coordinador    VARCHAR2(15) NOT NULL
   )
    ;
-CREATE UNIQUE INDEX AREAS__IDX ON P09779_1_2.AREAS
+  CREATE UNIQUE INDEX AREAS__IDX ON P09779_1_2.AREAS
   (
     id_coordinador ASC
   )
   ;
-ALTER TABLE P09779_1_2.AREAS ADD CONSTRAINT AREAS_PK PRIMARY KEY ( codigo ) ;
+
+  ALTER TABLE P09779_1_2.AREAS ADD CONSTRAINT AREAS_PK PRIMARY KEY ( codigo ) ;
   
   CREATE TABLE P09779_1_2.CIUDADES
   (
@@ -40,7 +41,8 @@ ALTER TABLE P09779_1_2.AREAS ADD CONSTRAINT AREAS_PK PRIMARY KEY ( codigo ) ;
     cod_dpto INTEGER NOT NULL
   )
    ;
-ALTER TABLE P09779_1_2.CIUDADES ADD CONSTRAINT CIUDADES_PK PRIMARY KEY ( codigo ) ;
+
+  ALTER TABLE P09779_1_2.CIUDADES ADD CONSTRAINT CIUDADES_PK PRIMARY KEY ( codigo ) ;
 
   CREATE TABLE P09779_1_2.DEPARTAMENTOS
   (
@@ -49,7 +51,8 @@ ALTER TABLE P09779_1_2.CIUDADES ADD CONSTRAINT CIUDADES_PK PRIMARY KEY ( codigo 
     cod_pais INTEGER NOT NULL
   )
    ;
-ALTER TABLE P09779_1_2.DEPARTAMENTOS ADD CONSTRAINT DEPARTAMENTOS_PK PRIMARY KEY ( codigo ) ;
+
+  ALTER TABLE P09779_1_2.DEPARTAMENTOS ADD CONSTRAINT DEPARTAMENTOS_PK PRIMARY KEY ( codigo ) ;
 
   CREATE TABLE P09779_1_2.EMPLEADOS
   (
@@ -64,7 +67,8 @@ ALTER TABLE P09779_1_2.DEPARTAMENTOS ADD CONSTRAINT DEPARTAMENTOS_PK PRIMARY KEY
     lugar_nacimiento  INTEGER NOT NULL
   )
    ;
-ALTER TABLE P09779_1_2.EMPLEADOS ADD CONSTRAINT EMPLEADOS_PK PRIMARY KEY ( identificacion ) ;
+
+  ALTER TABLE P09779_1_2.EMPLEADOS ADD CONSTRAINT EMPLEADOS_PK PRIMARY KEY ( identificacion ) ;
 
   CREATE TABLE P09779_1_2.FACULTADES
   (
@@ -75,12 +79,14 @@ ALTER TABLE P09779_1_2.EMPLEADOS ADD CONSTRAINT EMPLEADOS_PK PRIMARY KEY ( ident
     id_decano    VARCHAR2(15)
   )
    ;
-CREATE UNIQUE INDEX FACULTADES__IDX ON P09779_1_2.FACULTADES
+
+  CREATE UNIQUE INDEX FACULTADES__IDX ON P09779_1_2.FACULTADES
   (
     id_decano ASC
   )
   ;
-ALTER TABLE P09779_1_2.FACULTADES ADD CONSTRAINT FACULTADES_PK PRIMARY KEY ( codigo ) ;
+
+  ALTER TABLE P09779_1_2.FACULTADES ADD CONSTRAINT FACULTADES_PK PRIMARY KEY ( codigo ) ;
 
   CREATE TABLE P09779_1_2.PAISES
   (
@@ -88,7 +94,8 @@ ALTER TABLE P09779_1_2.FACULTADES ADD CONSTRAINT FACULTADES_PK PRIMARY KEY ( cod
     nombre VARCHAR2(20) NOT NULL
   )
    ;
-ALTER TABLE P09779_1_2.PAISES ADD CONSTRAINT PAISES_PK PRIMARY KEY ( codigo ) ;
+
+  ALTER TABLE P09779_1_2.PAISES ADD CONSTRAINT PAISES_PK PRIMARY KEY ( codigo ) ;
 
   CREATE TABLE P09779_1_2.PROGRAMAS
   (
@@ -97,7 +104,8 @@ ALTER TABLE P09779_1_2.PAISES ADD CONSTRAINT PAISES_PK PRIMARY KEY ( codigo ) ;
     codigo_area INTEGER NOT NULL
   )
    ;
-ALTER TABLE P09779_1_2.PROGRAMAS ADD CONSTRAINT PROGRAMAS_PK PRIMARY KEY ( codigo ) ;
+
+  ALTER TABLE P09779_1_2.PROGRAMAS ADD CONSTRAINT PROGRAMAS_PK PRIMARY KEY ( codigo ) ;
 
   CREATE TABLE P09779_1_2.SEDES
   (
@@ -106,17 +114,20 @@ ALTER TABLE P09779_1_2.PROGRAMAS ADD CONSTRAINT PROGRAMAS_PK PRIMARY KEY ( codig
     cod_ciudad INTEGER NOT NULL
   )
    ;
-ALTER TABLE P09779_1_2.SEDES ADD CONSTRAINT SEDES_PK PRIMARY KEY ( codigo ) ;
+
+  ALTER TABLE P09779_1_2.SEDES ADD CONSTRAINT SEDES_PK PRIMARY KEY ( codigo ) ;
 
   CREATE TABLE P09779_1_2.TIPOS_CONTRATACION
   ( nombre VARCHAR2(30) NOT NULL
   )  ;
-ALTER TABLE P09779_1_2.TIPOS_CONTRATACION ADD CONSTRAINT TIPOS_CONTRATACION_PK PRIMARY KEY ( nombre ) ;
+
+  ALTER TABLE P09779_1_2.TIPOS_CONTRATACION ADD CONSTRAINT TIPOS_CONTRATACION_PK PRIMARY KEY ( nombre ) ;
 
   CREATE TABLE P09779_1_2.TIPOS_EMPLEADO
   ( nombre VARCHAR2(30) NOT NULL
   )  ;
-ALTER TABLE P09779_1_2.TIPOS_EMPLEADO ADD CONSTRAINT TIPOS_EMPLEADO_PK PRIMARY KEY ( nombre ) ;
+
+  ALTER TABLE P09779_1_2.TIPOS_EMPLEADO ADD CONSTRAINT TIPOS_EMPLEADO_PK PRIMARY KEY ( nombre ) ;
 
   ALTER TABLE P09779_1_2.AREAS ADD CONSTRAINT AREAS_EMPLEADOS_FK FOREIGN KEY ( id_coordinador ) REFERENCES P09779_1_2.EMPLEADOS ( identificacion ) ;
   
@@ -143,32 +154,32 @@ ALTER TABLE P09779_1_2.TIPOS_EMPLEADO ADD CONSTRAINT TIPOS_EMPLEADO_PK PRIMARY K
   ALTER TABLE P09779_1_2.SEDES ADD CONSTRAINT SEDES_CIUDADES_FK FOREIGN KEY ( cod_ciudad ) REFERENCES P09779_1_2.CIUDADES ( codigo ) ;
 
   ```
-<br></br>
+
 
 - **Datos (Inserción)**
 
   ```
-  insert into P09779_1_2.PAISES (codigo, nombre) values (57, 'COLOMBIA'); 
-insert into P09779_1_2.DEPARTAMENTOS (codigo, nombre, cod_pais) values (76, 'VALLE DEL CAUCA', 57); 
-insert into P09779_1_2.DEPARTAMENTOS (codigo, nombre, cod_pais) values (19, 'CAUCA', 57); 
+  insert into P09779_1_2.PAISES (codigo, nombre) values (57, 'COLOMBIA');
+  insert into P09779_1_2.DEPARTAMENTOS (codigo, nombre, cod_pais) values (76, 'VALLE DEL CAUCA', 57);
+  insert into P09779_1_2.DEPARTAMENTOS (codigo, nombre, cod_pais) values (19, 'CAUCA', 57); 
 
-  insert into P09779_1_2.CIUDADES (codigo, nombre, cod_dpto) values (76001, 'CALI', 76); 
-insert into P09779_1_2.CIUDADES (codigo, nombre, cod_dpto) values (76364, 'JAMUNDI', 76); 
-insert into P09779_1_2.CIUDADES (codigo, nombre, cod_dpto) values (19001, 'POPAYAN', 19); 
+  insert into P09779_1_2.CIUDADES (codigo, nombre, cod_dpto) values (76001, 'CALI', 76);
+  insert into P09779_1_2.CIUDADES (codigo, nombre, cod_dpto) values (76364, 'JAMUNDI', 76);
+  insert into P09779_1_2.CIUDADES (codigo, nombre, cod_dpto) values (19001, 'POPAYAN', 19); 
 
   insert into P09779_1_2.FACULTADES (codigo, nombre, ubicacion, nro_telefono) values (1, 'INGENIERIA', 'P38-203', '3197906');
 
   insert into P09779_1_2.SEDES (codigo, nombre, cod_ciudad) values (1, 'PANCE', 76001);
 
   insert into P09779_1_2.TIPOS_CONTRATACION (nombre) values ('PRESTACION DE SERVICIOS');
-insert into P09779_1_2.TIPOS_CONTRATACION (nombre) values ('CONTRATO A TERMINO INDEFINIDO');
-insert into P09779_1_2.TIPOS_CONTRATACION (nombre) values ('CONTRATO A TERMINO DEFINIDO');
+  insert into P09779_1_2.TIPOS_CONTRATACION (nombre) values ('CONTRATO A TERMINO INDEFINIDO');
+  insert into P09779_1_2.TIPOS_CONTRATACION (nombre) values ('CONTRATO A TERMINO DEFINIDO');
 
   insert into P09779_1_2.TIPOS_EMPLEADO (nombre) values ('ADMINISTRATIVO');
-insert into P09779_1_2.TIPOS_EMPLEADO (nombre) values ('DOCENTE');
+  insert into P09779_1_2.TIPOS_EMPLEADO (nombre) values ('DOCENTE');
 
   insert into P09779_1_2.EMPLEADOS (identificacion, nombres, apellidos, email, tipo_contratacion, tipo_empleado, cod_facultad, codigo_sede, lugar_nacimiento) values (10, 'ROCIO', 'LOPEZ', 'RLOPEZ@U.EDU.CO', 'CONTRATO A TERMINO INDEFINIDO', 'ADMINISTRATIVO', 1, 1, 76364);
-insert into P09779_1_2.EMPLEADOS (identificacion, nombres, apellidos, email, tipo_contratacion, tipo_empleado, cod_facultad, codigo_sede, lugar_nacimiento) values (11, 'JOSE', 'JURADO', 'JJURADO@U.EDU.CO', 'CONTRATO A TERMINO INDEFINIDO', 'DOCENTE', 1, 1, 19001);
+  insert into P09779_1_2.EMPLEADOS (identificacion, nombres, apellidos, email, tipo_contratacion, tipo_empleado, cod_facultad, codigo_sede, lugar_nacimiento) values (11, 'JOSE', 'JURADO', 'JJURADO@U.EDU.CO', 'CONTRATO A TERMINO INDEFINIDO', 'DOCENTE', 1, 1, 19001);
 
   insert into P09779_1_2.AREAS (codigo, nombre, codigo_facultad, id_coordinador) values (1, 'CSI', 1, 10); 
 
