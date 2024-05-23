@@ -14,7 +14,7 @@ import { MongooseModule } from '@nestjs/mongoose';
         isGlobal: true, 
     }),
     StudentModule,
-    MongooseModule.forRoot('"mongodb+srv://Juan:juan@cluster01.jh82oxj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster01')
+    MongooseModule.forRoot('mongodb+srv://Juan:juan@cluster01.jh82oxj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster01')
     
   ],
   controllers: [AppController],
