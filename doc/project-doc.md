@@ -9,6 +9,8 @@
 
   - **Comentarios**: Decidimos crear una colección propia de comentarios, pues cada uno de estos documentos se relaciona con un documento de 'Personas' y con un documento de 'Eventos'. Así pues, por esa misma razón, 'Comentarios' posee una Foreign Key que referencia tanto al documento de 'Personas' como al de 'Eventos'.
 
+  ![Schema MongoDB](https://github.com/JuanJoseLL/sid-project/raw/relational%26norelational-db/doc/schemas/mongodb/schemamongodb.png)
+
 ### **BD Relacional**
 Realizamos la base de datos relacional en Oracle, a través de SQLDeveloper, utilizando los usuarios (P09779_1_2) y el nombre del servicio (ESTUD) dados. Así, fue necesario modificar los scripts de creación de tablas y de inserción, pues Oracle crea un esquema automático para cada usuario (cuyo nombre es el nombre del usuario):
 
