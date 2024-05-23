@@ -22,17 +22,22 @@
   "dependencies": {
     "@nestjs/cache-manager": "^2.2.2",
     "@nestjs/common": "^10.0.0",
+    "@nestjs/config": "^3.2.2",
     "@nestjs/core": "^10.0.0",
     "@nestjs/mapped-types": "*",
     "@nestjs/mongoose": "^10.0.6",
     "@nestjs/platform-express": "^10.0.0",
+    "@nestjs/typeorm": "^10.0.2",
     "cache-manager": "^5.5.2",
     "cache-manager-redis-store": "^3.0.1",
     "cache-manager-redis-yet": "^5.0.0",
+    "dotenv": "^16.4.5",
     "mongoose": "^8.3.4",
     "nestjs": "file:../../../../../../mongoose",
+    "oracledb": "^6.5.0",
     "reflect-metadata": "^0.2.0",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "typeorm": "^0.3.20"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",

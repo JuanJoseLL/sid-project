@@ -5,9 +5,22 @@ import { CacheInterceptor, CacheModule, CacheModuleOptions } from '@nestjs/cache
 import { redisStore } from 'cache-manager-redis-yet';
 import { StudentModule } from './student/student.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
+    TypeOrmModule.forRoot({
+      type: 'oracle',
+      host: '172.16.0.103',  // O usa '172.16.0.103' si estás dentro de la red interna
+      port: 1522,
+      username: 'P09779_1_2',
+      password: 'MFQHqFMxVp',
+      sid: 'ESTUD',          // Utiliza 'sid' en lugar de 'serviceName' para conexiones Oracle
+      synchronize: true,
+      logging: true,  // Habilitar el logging
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+    }),
     CacheModule.register({
         store: redisStore,
         ttl: 30 * 1000, // Los elementos en caché se borran después de 30 segundos
