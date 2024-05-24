@@ -90,4 +90,48 @@
     margin-top: 2rem;
     text-align: center;
   }
+  .container {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  .title {
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form label {
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .form input,
+  .form textarea {
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 1em;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .button {
+    background-color: #ff0000;
+    color: white;
+    padding: 10px;
+    font-size: 1em;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  .button:hover {
+    background-color: #cc0000;
+  }
   

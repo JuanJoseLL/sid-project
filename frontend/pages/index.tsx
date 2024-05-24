@@ -27,7 +27,7 @@ const Home: NextPage = () => {
         <div className={styles.grid}>
           <Link href="/events" legacyBehavior>
             <a className={styles.card}>
-              <h2>Ver Eventos &rarr;</h2>
+              <h2>Eventos &rarr;</h2>
               <p>Explora los eventos organizados por la universidad.</p>
             </a>
           </Link>
