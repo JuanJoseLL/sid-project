@@ -1,6 +1,6 @@
-// src/pages/index.tsx
 import { NextPage } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useMyContext } from '../src/components/context/MyContext';
 import styles from '../styles/Home.module.css';
 
@@ -25,20 +25,26 @@ const Home: NextPage = () => {
         </p>
 
         <div className={styles.grid}>
-          <a href="/events" className={styles.card}>
-            <h2>Ver Eventos &rarr;</h2>
-            <p>Explora los eventos organizados por la universidad.</p>
-          </a>
+          <Link href="/events" legacyBehavior>
+            <a className={styles.card}>
+              <h2>Ver Eventos &rarr;</h2>
+              <p>Explora los eventos organizados por la universidad.</p>
+            </a>
+          </Link>
 
-          <a href="/attendees" className={styles.card}>
-            <h2>Asistentes &rarr;</h2>
-            <p>Gestiona la lista de asistentes.</p>
-          </a>
+          <Link href="/attendees" legacyBehavior>
+            <a className={styles.card}>
+              <h2>Asistentes &rarr;</h2>
+              <p>Gestiona la lista de asistentes.</p>
+            </a>
+          </Link>
 
-          <a href="/facilitators" className={styles.card}>
-            <h2>Facilitadores &rarr;</h2>
-            <p>Gestiona la lista de facilitadores.</p>
-          </a>
+          <Link href="/facilitators" legacyBehavior>
+            <a className={styles.card}>
+              <h2>Facilitadores &rarr;</h2>
+              <p>Gestiona la lista de facilitadores.</p>
+            </a>
+          </Link>
         </div>
 
         <div className={styles.context}>
