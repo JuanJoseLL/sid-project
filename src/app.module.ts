@@ -12,11 +12,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   imports: [
     TypeOrmModule.forRoot({
       type: 'oracle',
-      host: '172.16.0.103',  // O usa '172.16.0.103' si estás dentro de la red interna
-      port: 1522,
+      connectString:  "(DESCRIPTION=(ADDRESS=(PROTOCOL = TCP)(HOST = 200.3.193.24)(PORT = 1522))(CONNECT_DATA=(SERVICE_NAME = ESTUD)))",
+      //host: '',  // O usar 172.16.0.103 '200.3.193.24' si estás fuera de la red interna
+      //port: 1522,
       username: 'P09779_1_2',
       password: 'MFQHqFMxVp',
-      sid: 'ESTUD',          // Utiliza 'sid' en lugar de 'serviceName' para conexiones Oracle
+      //sid: '',          // Utiliza 'sid' en lugar de 'serviceName' para conexiones Oracle
       synchronize: true,
       logging: true,  // Habilitar el logging
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
@@ -27,8 +28,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         isGlobal: true, 
     }),
     StudentModule,
-    MongooseModule.forRoot('"mongodb+srv://Juan:juan@cluster01.jh82oxj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster01')
-    
+    //MongooseModule.forRoot('"mongodb+srv://Juan:juan@cluster01.jh82oxj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster01')
   ],
   controllers: [AppController],
   providers: [AppService, {
