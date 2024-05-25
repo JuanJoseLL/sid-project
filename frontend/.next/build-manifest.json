@@ -32,15 +32,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/attendees.js"
     ],
-    "/places": [
+    "/attendees/register": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/places.js"
-    ],
-    "/places/register": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/places/register.js"
+      "static/chunks/pages/attendees/register.js"
     ]
   },
   "ampFirstPages": []
