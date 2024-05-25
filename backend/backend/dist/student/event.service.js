@@ -16,7 +16,7 @@ exports.EventService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
-const event_schema_1 = require("./event.schema");
+const event_schema_1 = require("../event/event.schema");
 let EventService = class EventService {
     constructor(eventModel) {
         this.eventModel = eventModel;

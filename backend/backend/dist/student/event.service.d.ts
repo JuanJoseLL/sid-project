@@ -24,7 +24,7 @@
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
 import { Model } from 'mongoose';
-import { Event } from './event.schema';
+import { Event } from '../event/event.schema';
 export declare class EventService {
     private eventModel;
     constructor(eventModel: Model<Event>);

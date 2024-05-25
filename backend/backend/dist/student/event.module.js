@@ -11,7 +11,7 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const event_schema_1 = require("./event.schema");
 const event_service_1 = require("./event.service");
-const event_controller_1 = require("./event.controller");
+const event_controller_1 = require("../event/event.controller");
 let EventModule = class EventModule {
 };
 exports.EventModule = EventModule;

@@ -12,32 +12,20 @@ const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const cache_manager_1 = require("@nestjs/cache-manager");
 const cache_manager_redis_yet_1 = require("cache-manager-redis-yet");
-const student_module_1 = require("./student/student.module");
+const event_module_1 = require("./event/event.module");
 const mongoose_1 = require("@nestjs/mongoose");
-const typeorm_1 = require("@nestjs/typeorm");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_1.TypeOrmModule.forRoot({
-                type: 'oracle',
-                host: '200.3.193.24',
-                port: 1522,
-                username: 'P09779_1_2',
-                password: 'MFQHqFMxVp',
-                sid: 'ESTUD',
-                synchronize: true,
-                logging: true,
-                entities: [__dirname + '/**/*.entity{.ts,.js}'],
-            }),
             cache_manager_1.CacheModule.register({
                 store: cache_manager_redis_yet_1.redisStore,
                 ttl: 30 * 1000,
                 isGlobal: true,
             }),
-            student_module_1.StudentModule,
+            event_module_1.EventModule,
             mongoose_1.MongooseModule.forRoot('mongodb+srv://Juan:juan@cluster01.jh82oxj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster01')
         ],
         controllers: [app_controller_1.AppController],
