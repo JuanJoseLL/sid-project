@@ -7,28 +7,28 @@ import { StudentModule } from './student/student.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import * as oracledb from 'oracledb';
+
+oracledb.initOracleClient({ libDir: 'C:\\instantclient_21_13' });
 
 @Module({
-  imports: [
+  imports: [   
     TypeOrmModule.forRoot({
       type: 'oracle',
-      connectString:  "(DESCRIPTION=(ADDRESS=(PROTOCOL = TCP)(HOST = 200.3.193.24)(PORT = 1522))(CONNECT_DATA=(SERVICE_NAME = ESTUD)))",
-      //host: '',  // O usar 172.16.0.103 '200.3.193.24' si estás fuera de la red interna
-      //port: 1522,
+      connectString: "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=200.3.193.24)(PORT=1522))(CONNECT_DATA=(SERVICE_NAME=ESTUD)))",
       username: 'P09779_1_2',
       password: 'MFQHqFMxVp',
-      //sid: '',          // Utiliza 'sid' en lugar de 'serviceName' para conexiones Oracle
       synchronize: true,
-      logging: true,  // Habilitar el logging
+      logging: true,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
     }),
     CacheModule.register({
-        store: redisStore,
-        ttl: 30 * 1000, // Los elementos en caché se borran después de 30 segundos
-        isGlobal: true, 
+      store: redisStore,
+      ttl: 30 * 1000, // Los elementos en caché se borran después de 30 segundos
+      isGlobal: true,
     }),
     StudentModule,
-    //MongooseModule.forRoot('"mongodb+srv://Juan:juan@cluster01.jh82oxj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster01')
+    MongooseModule.forRoot('mongodb+srv://Juan:juan@cluster01.jh82oxj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster01')
   ],
   controllers: [AppController],
   providers: [AppService, {
