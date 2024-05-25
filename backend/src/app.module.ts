@@ -9,6 +9,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PlaceModule } from './place/place.module';
+import { AttendeesModule } from './attendees/attendees.module';
 import * as oracledb from 'oracledb';
 
 oracledb.initOracleClient({ libDir: 'C:\\instantclient_21_13' });
@@ -31,7 +32,8 @@ oracledb.initOracleClient({ libDir: 'C:\\instantclient_21_13' });
     }),
     StudentModule,
     MongooseModule.forRoot('mongodb+srv://Juan:juan@cluster01.jh82oxj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster01'),
-    PlaceModule
+    PlaceModule,
+    AttendeesModule
   ],
   controllers: [AppController],
   providers: [AppService, {
