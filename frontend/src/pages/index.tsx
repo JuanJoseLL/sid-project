@@ -45,6 +45,12 @@ const Home: NextPage = () => {
               <p>Gestiona la lista de facilitadores.</p>
             </a>
           </Link>
+          <Link href="/places" legacyBehavior>
+            <a className={styles.card}>
+              <h2>Lugares &rarr;</h2>
+              <p>Gestiona la lista de lugares.</p>
+            </a>
+          </Link>
         </div>
 
         <div className={styles.context}>
