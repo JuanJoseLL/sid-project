@@ -8,6 +8,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CommentModule } from './comments/comment.module';
+import { PeopleModule } from './people/people.module';
 
 @Module({
   imports: [
@@ -22,21 +23,22 @@ import { CommentModule } from './comments/comment.module';
     //   logging: true,  // Habilitar el logging
     //   entities: [__dirname + '/**/*.entity{.ts,.js}'],
     // }),
-    CacheModule.register({
+    /*CacheModule.register({
         store: redisStore,
         ttl: 30 * 1000, // Los elementos en caché se borran después de 30 segundos
         isGlobal: true, 
-    }),
+    }),*/
     EventModule,
+    PeopleModule,
     ConfigModule,
     MongooseModule.forRoot('mongodb+srv://Juan:juan@cluster01.jh82oxj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster01')
     
   ],
   controllers: [AppController],
-  providers: [AppService, {
+  providers: [AppService, /*{
     provide: 'APP_INTERCEPTOR', // Aqui estamos definiendo que el interceptor de cache
     useClass: CacheInterceptor, // se aplique a todas las rutas de nuestra aplicación OJO solo metodo GET
     // La key de los datos en caché se generará a partir de la URL de la solicitud.
-  }],
+  }*/],
 })
 export class AppModule {}
