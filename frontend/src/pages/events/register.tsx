@@ -16,28 +16,34 @@ const Register: NextPage = () => {
   const [comments, setComments] = useState('');
 
 
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const eventData = {
-      title,
-      description,
-      categories: categories.split(','),
-      date,
-      location,
-      attendees: attendees.split(','),
-      facilitators: facilitators.split(','),
-      organizingFaculties: organizingFaculties.split(','),
-      comments: comments.split('\n')
+      titulo: title,
+      descripcion: description,
+      categorias: categories.split(','),
+      fecha: date,
+      lugar: location,
+      asistentes: attendees.split(','),
+      conferencistas: facilitators.split(','),
+      facultades_organizadoras: organizingFaculties.split(','),
+      comentarios: comments.split('\n')
     };
-
+  
     try {
       await createEvent(eventData);
       alert('Event registered successfully');
     } catch (error) {
-      console.error('Failed to create event', error);
-      alert('Failed to create event');
+      console.error('Error:', error);
+      if (error.message.includes('Event with the same title already exists')) {
+        alert('An event with the same title already exists. Please choose a different title.');
+      } else {
+        alert('Failed to register event');
+      }
     }
   };
+  
 
   return (
     <div className={styles.container}>

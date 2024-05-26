@@ -5,18 +5,17 @@ import { useEffect, useState } from 'react';
 import styles from '../styles/Home.module.css';
 
 interface Event {
-  id: number;
-  title: string;
-  date: string;
-  location: string;
+  _id: string;
+  titulo: string;
+  fecha: string;
+  lugar: string;
 }
 
 const Events: NextPage = () => {
   const [events, setEvents] = useState<Event[]>([]);
 
   useEffect(() => {
-    // Aquí se debería hacer la llamada a la API para obtener la lista de eventos
-    fetch('/api/events')
+    fetch('http://localhost:4000/events')
       .then((response) => response.json())
       .then((data) => setEvents(data));
   }, []);
@@ -42,12 +41,12 @@ const Events: NextPage = () => {
 
         <ul className={styles.list}>
           {events.map((event) => (
-            <li key={event.id} className={styles.listItem}>
-              <Link href={`/events/${event.id}`}>
+            <li key={event._id} className={styles.listItem}>
+              <Link href={`/events/${event._id}`}>
                 <div className={styles.card}>
-                  <h2>{event.title}</h2>
-                  <p>{event.date}</p>
-                  <p>{event.location}</p>
+                  <h2>{event.titulo}</h2>
+                  <p>{event.fecha}</p>
+                  <p>{event.lugar}</p>
                 </div>
               </Link>
             </li>

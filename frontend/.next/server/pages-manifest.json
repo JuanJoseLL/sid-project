@@ -3,7 +3,5 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/events": "pages/events.js",
-  "/": "pages/index.js",
-  "/attendees": "pages/attendees.js",
-  "/attendees/register": "pages/attendees/register.js"
+  "/events/[id]": "pages/events/[id].js"
 }

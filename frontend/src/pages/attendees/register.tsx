@@ -2,77 +2,90 @@ import { useState } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import styles from '../../styles/Home.module.css';
-import { createAttendee } from '../../services/attendeeService';
+import { createEvent } from '../../services/eventService';
 
-const RegisterAttendee: NextPage = () => {
-  const [identifier, setIdentifier] = useState('');
-  const [username, setUsername] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [relationshipType, setRelationshipType] = useState('');
-  const [email, setEmail] = useState('');
-  const [city, setCity] = useState('');
+const Register: NextPage = () => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [categories, setCategories] = useState('');
+  const [date, setDate] = useState('');
+  const [location, setLocation] = useState('');
+  const [attendees, setAttendees] = useState('');
+  const [facilitators, setFacilitators] = useState('');
+  const [organizingFaculties, setOrganizingFaculties] = useState('');
+  const [comments, setComments] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const attendeeData = {
-      identifier,
-      username,
-      fullName,
-      relationshipType,
-      email,
-      city
+    const eventData = {
+      title,
+      description,
+      categories: categories.split(','),
+      date,
+      location,
+      attendees: attendees.split(','),
+      facilitators: facilitators.split(','),
+      organizingFaculties: organizingFaculties.split(','),
+      comments: comments.split('\n')
     };
-
-    try {
-      await createAttendee(attendeeData);
-      alert('Attendee registered successfully');
-    } catch (error) {
-      console.error('Failed to create attendee', error);
-      alert('Failed to create attendee');
-    }
+    await createEvent(eventData);
+     
+    alert('Event registered successfully');
   };
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>Registrar Asistente</title>
-        <meta name="description" content="Registrar un nuevo asistente o conferencista" />
+        <title>Registrar Evento</title>
+        <meta name="description" content="Registrar un nuevo evento" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Registrar Nuevo Asistente o Conferencista</h1>
+        <h1 className={styles.title}>Registrar Nuevo Evento</h1>
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <label>
-            Identificador:
-            <input type="text" value={identifier} onChange={(e) => setIdentifier(e.target.value)} />
+            Título:
+            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
           </label>
           <label>
-            Nombre de Usuario:
-            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+            Descripción:
+            <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
           </label>
           <label>
-            Nombre Completo:
-            <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} />
+            Categorías:
+            <input type="text" value={categories} onChange={(e) => setCategories(e.target.value)} />
           </label>
           <label>
-            Tipo de Relación:
-            <input type="text" value={relationshipType} onChange={(e) => setRelationshipType(e.target.value)} />
+            Fecha:
+            <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
           </label>
           <label>
-            Email:
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            Lugar:
+            <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} />
           </label>
           <label>
-            Ciudad:
-            <input type="text" value={city} onChange={(e) => setCity(e.target.value)} />
+            Asistentes:
+            <input type="text" value={attendees} onChange={(e) => setAttendees(e.target.value)} />
           </label>
-          <button type="submit" className={styles.button}>Registrar Asistente</button>
+          <label>
+            Facilitadores:
+            <input type="text" value={facilitators} onChange={(e) => setFacilitators(e.target.value)} />
+          </label>
+          <label>
+            Facultades Organizadoras:
+            <input type="text" value={organizingFaculties} onChange={(e) => setOrganizingFaculties(e.target.value)} />
+          </label>
+          <label>
+            Comentarios:
+            <textarea value={comments} onChange={(e) => setComments(e.target.value)} />
+          </label>
+          <button type="submit" className={styles.button}>Registrar Evento</button>
         </form>
       </main>
     </div>
   );
 };
 
-export default RegisterAttendee;
+export default Register;
