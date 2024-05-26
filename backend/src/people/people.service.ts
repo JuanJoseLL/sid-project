@@ -11,9 +11,9 @@ export class PeopleService {
   constructor(@InjectModel(People.name) private peopleModel: Model<People>) {}
 
   async create(createPeopleDTO: CreatePeopleDTO): Promise<People> {
-    console.log('Creating event with DTO:', createPeopleDTO);
-    const createdEvent = new this.peopleModel(createPeopleDTO);
-    return createdEvent.save();
+    console.log('Creating People with DTO:', createPeopleDTO);
+    const createdPeople = new this.peopleModel(createPeopleDTO);
+    return createdPeople.save();
   }
 
   async findAll(): Promise<People[]> {
