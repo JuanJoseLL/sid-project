@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { EventService } from './event.service';
 import { CreateEventDto } from './dto/create-event.dto';
-import { CreateCommentDto } from './dto/create-comment.dto';
+import { CreateCommentDto } from '../comments/dto/create-comment.dto';
 import { CommentService } from '../comments/comment.service';
 
 @Controller('events')

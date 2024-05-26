@@ -48,7 +48,7 @@ __decorate([
     __metadata("design:type", Array)
 ], Event.prototype, "facultades_organizadoras", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
+    (0, mongoose_1.Prop)({ type: [{ type: mongoose_2.Types.ObjectId, ref: 'Comment' }] }),
     __metadata("design:type", Array)
 ], Event.prototype, "comentarios", void 0);
 exports.Event = Event = __decorate([

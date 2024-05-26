@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CommentSchema = exports.Comment = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
-const mongoose = require("mongoose");
 let Comment = class Comment extends mongoose_2.Document {
 };
 exports.Comment = Comment;
@@ -21,9 +20,13 @@ __decorate([
     __metadata("design:type", String)
 ], Comment.prototype, "texto", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ type: mongoose.Schema.Types.ObjectId, ref: 'Event', required: true }),
-    __metadata("design:type", String)
+    (0, mongoose_1.Prop)({ type: mongoose_2.Types.ObjectId, ref: 'Event', required: true }),
+    __metadata("design:type", mongoose_2.Types.ObjectId)
 ], Comment.prototype, "evento", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: mongoose_2.Types.ObjectId, ref: 'People', required: true }),
+    __metadata("design:type", mongoose_2.Types.ObjectId)
+], Comment.prototype, "persona", void 0);
 exports.Comment = Comment = __decorate([
     (0, mongoose_1.Schema)()
 ], Comment);

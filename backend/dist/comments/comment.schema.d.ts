@@ -23,14 +23,14 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
-import { Document } from 'mongoose';
-import * as mongoose from 'mongoose';
+import { Document, Types } from 'mongoose';
 export declare class Comment extends Document {
     texto: string;
-    evento: string;
+    evento: Types.ObjectId;
+    persona: Types.ObjectId;
 }
-export declare const CommentSchema: mongoose.Schema<Comment, mongoose.Model<Comment, any, any, any, Document<unknown, any, Comment> & Comment & Required<{
+export declare const CommentSchema: import("mongoose").Schema<Comment, import("mongoose").Model<Comment, any, any, any, Document<unknown, any, Comment> & Comment & Required<{
     _id: unknown;
-}>, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, Comment, Document<unknown, {}, mongoose.FlatRecord<Comment>> & mongoose.FlatRecord<Comment> & Required<{
+}>, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Comment, Document<unknown, {}, import("mongoose").FlatRecord<Comment>> & import("mongoose").FlatRecord<Comment> & Required<{
     _id: unknown;
 }>>;

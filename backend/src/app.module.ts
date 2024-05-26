@@ -23,14 +23,15 @@ import { PeopleModule } from './people/people.module';
     //   logging: true,  // Habilitar el logging
     //   entities: [__dirname + '/**/*.entity{.ts,.js}'],
     // }),
-    /*CacheModule.register({
+    CacheModule.register({
         store: redisStore,
         ttl: 30 * 1000, // Los elementos en caché se borran después de 30 segundos
         isGlobal: true, 
-    }),*/
+    }),
     EventModule,
     PeopleModule,
     ConfigModule,
+    CommentModule,
     MongooseModule.forRoot('mongodb+srv://Juan:juan@cluster01.jh82oxj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster01')
     
   ],

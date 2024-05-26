@@ -20,7 +20,7 @@ exports.CommentModule = CommentModule = __decorate([
         imports: [
             mongoose_1.MongooseModule.forFeature([{ name: comment_schema_1.Comment.name, schema: comment_schema_1.CommentSchema }]),
         ],
-        controllers: [comment_controller_1.commentController],
+        controllers: [comment_controller_1.CommentController],
         providers: [comment_service_1.CommentService],
         exports: [comment_service_1.CommentService],
     })

@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreatePeopleDTO } from './dto/create-people.dto';
 import { People } from './people.schema';
-import { CreateCommentDto } from '../events/dto/create-comment.dto';
+import { CreateCommentDto } from '../comments/dto/create-comment.dto';
 import { Comment, CommentSchema } from '../comments/comment.schema';
 
 @Injectable()

@@ -15,6 +15,8 @@ const cache_manager_redis_yet_1 = require("cache-manager-redis-yet");
 const event_module_1 = require("./events/event.module");
 const mongoose_1 = require("@nestjs/mongoose");
 const config_1 = require("@nestjs/config");
+const comment_module_1 = require("./comments/comment.module");
+const people_module_1 = require("./people/people.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -27,14 +29,14 @@ exports.AppModule = AppModule = __decorate([
                 isGlobal: true,
             }),
             event_module_1.EventModule,
+            people_module_1.PeopleModule,
             config_1.ConfigModule,
+            comment_module_1.CommentModule,
             mongoose_1.MongooseModule.forRoot('mongodb+srv://Juan:juan@cluster01.jh82oxj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster01')
         ],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService, {
-                provide: 'APP_INTERCEPTOR',
-                useClass: cache_manager_1.CacheInterceptor,
-            }],
+        providers: [app_service_1.AppService,
+        ],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

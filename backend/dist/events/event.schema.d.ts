@@ -23,7 +23,7 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 export declare class Event extends Document {
     titulo: string;
     descripcion: string;
@@ -33,7 +33,7 @@ export declare class Event extends Document {
     asistentes: string[];
     conferencistas: string[];
     facultades_organizadoras: string[];
-    comentarios?: string[];
+    comentarios?: Types.ObjectId[];
 }
 export declare const EventSchema: import("mongoose").Schema<Event, import("mongoose").Model<Event, any, any, any, Document<unknown, any, Event> & Event & Required<{
     _id: unknown;

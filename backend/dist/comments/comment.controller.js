@@ -12,41 +12,40 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.commentController = void 0;
+exports.CommentController = void 0;
 const common_1 = require("@nestjs/common");
-const create_comment_dto_1 = require("../events/dto/create-comment.dto");
-const comment_service_1 = require("../comments/comment.service");
-let commentController = class commentController {
+const comment_service_1 = require("./comment.service");
+const create_comment_dto_1 = require("./dto/create-comment.dto");
+let CommentController = class CommentController {
     constructor(commentService) {
         this.commentService = commentService;
     }
-    async addComment(id, createCommentDto) {
-        createCommentDto.evento = id;
-        console.log("ewe");
+    async create(eventId, createCommentDto) {
+        createCommentDto.evento = eventId;
         return this.commentService.create(createCommentDto);
     }
-    async getComments(id) {
-        return this.commentService.findByEvent(id);
+    async getCommentsByEvent(eventId) {
+        return this.commentService.findByEvent(eventId);
     }
 };
-exports.commentController = commentController;
+exports.CommentController = CommentController;
 __decorate([
-    (0, common_1.Post)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Post)(':eventId'),
+    __param(0, (0, common_1.Param)('eventId')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, create_comment_dto_1.CreateCommentDto]),
     __metadata("design:returntype", Promise)
-], commentController.prototype, "addComment", null);
+], CommentController.prototype, "create", null);
 __decorate([
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Get)('event/:eventId'),
+    __param(0, (0, common_1.Param)('eventId')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], commentController.prototype, "getComments", null);
-exports.commentController = commentController = __decorate([
+], CommentController.prototype, "getCommentsByEvent", null);
+exports.CommentController = CommentController = __decorate([
     (0, common_1.Controller)('comments'),
     __metadata("design:paramtypes", [comment_service_1.CommentService])
-], commentController);
+], CommentController);
 //# sourceMappingURL=comment.controller.js.map

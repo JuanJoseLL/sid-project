@@ -1,8 +1,8 @@
-import { CreateCommentDto } from '../events/dto/create-comment.dto';
-import { CommentService } from '../comments/comment.service';
-export declare class commentController {
+import { CommentService } from './comment.service';
+import { CreateCommentDto } from './dto/create-comment.dto';
+export declare class CommentController {
     private readonly commentService;
     constructor(commentService: CommentService);
-    addComment(id: string, createCommentDto: CreateCommentDto): Promise<void>;
-    getComments(id: string): Promise<void>;
+    create(eventId: string, createCommentDto: CreateCommentDto): Promise<import("./comment.schema").Comment>;
+    getCommentsByEvent(eventId: string): Promise<import("./comment.schema").Comment[]>;
 }

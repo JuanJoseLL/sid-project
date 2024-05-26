@@ -16,24 +16,29 @@ exports.CommentService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
-const comment_schema_1 = require("./comment.schema");
 let CommentService = class CommentService {
     constructor(commentModel) {
         this.commentModel = commentModel;
     }
     async create(createCommentDto) {
-        const createdComment = new this.commentModel(createCommentDto);
-        console.log(createdComment, "se creo");
-        createdComment.save();
+        const createdComment = new this.commentModel({
+            ...createCommentDto,
+            evento: new mongoose_2.Types.ObjectId(createCommentDto.evento),
+            persona: new mongoose_2.Types.ObjectId(createCommentDto.persona),
+        });
+        return createdComment.save();
     }
-    async findByEvent(evento) {
-        this.commentModel.find({ evento }).exec();
+    async findByEvent(eventId) {
+        return this.commentModel.find({ evento: new mongoose_2.Types.ObjectId(eventId) })
+            .populate('evento')
+            .populate('persona')
+            .exec();
     }
 };
 exports.CommentService = CommentService;
 exports.CommentService = CommentService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, mongoose_1.InjectModel)(comment_schema_1.Comment.name)),
+    __param(0, (0, mongoose_1.InjectModel)('Comment')),
     __metadata("design:paramtypes", [mongoose_2.Model])
 ], CommentService);
 //# sourceMappingURL=comment.service.js.map

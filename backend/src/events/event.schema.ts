@@ -1,6 +1,5 @@
-// src/events/event.schema.ts
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 @Schema()
 export class Event extends Document {
@@ -28,8 +27,8 @@ export class Event extends Document {
   @Prop({ required: true })
   facultades_organizadoras: string[];
 
-  @Prop()
-  comentarios?: string[];
+  @Prop({ type: [{ type: Types.ObjectId, ref: 'Comment' }] })
+  comentarios?: Types.ObjectId[];
 }
 
 export const EventSchema = SchemaFactory.createForClass(Event);

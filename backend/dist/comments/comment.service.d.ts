@@ -24,11 +24,11 @@
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
 import { Model } from 'mongoose';
-import { CreateCommentDto } from '../events/dto/create-comment.dto';
 import { Comment } from './comment.schema';
+import { CreateCommentDto } from './dto/create-comment.dto';
 export declare class CommentService {
     private commentModel;
     constructor(commentModel: Model<Comment>);
-    create(createCommentDto: CreateCommentDto): Promise<void>;
-    findByEvent(evento: string): Promise<void>;
+    create(createCommentDto: CreateCommentDto): Promise<Comment>;
+    findByEvent(eventId: string): Promise<Comment[]>;
 }

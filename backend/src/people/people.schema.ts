@@ -1,16 +1,15 @@
-// src/events/event.schema.ts
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
 class Ciudad {
-    @Prop({ required: true })
-    nombre: string;
-  
-    @Prop({ required: true })
-    departamento: string;
-  
-    @Prop({ required: true })
-    pais: string;
+  @Prop({ required: true })
+  nombre: string;
+
+  @Prop({ required: true })
+  departamento: string;
+
+  @Prop({ required: true })
+  pais: string;
 }
 
 @Schema()

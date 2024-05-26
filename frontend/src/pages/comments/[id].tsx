@@ -1,14 +1,34 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import { NextPage } from 'next';  // Correctly import NextPage
-import styles from '../../styles/Home.module.css';  // Adjust the path as needed
+import { NextPage } from 'next';
+import styles from '../../styles/Home.module.css';
 
-const Comment: NextPage = () => {
+const Comments: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
 
   const [texto, setTexto] = useState('');
+  const [comments, setComments] = useState([]);
+
+  const fetchComments = async () => {
+    try {
+      const response = await fetch(`http://localhost:4000/comments/event/${id}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch comments');
+      }
+      const data = await response.json();
+      setComments(data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      fetchComments();
+    }
+  }, [id]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,6 +36,7 @@ const Comment: NextPage = () => {
     const commentData = {
       texto,
       evento: id,
+      persona: "personid",
     };
 
     try {
@@ -33,6 +54,7 @@ const Comment: NextPage = () => {
 
       alert('Comment added successfully');
       setTexto('');
+      fetchComments(); // Refrescar la lista de comentarios después de añadir uno nuevo
     } catch (error) {
       console.error('Error:', error);
       alert('Failed to add comment');
@@ -42,13 +64,13 @@ const Comment: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Agregar Comentario</title>
-        <meta name="description" content="Agregar un comentario a un evento" />
+        <title>Comentarios del Evento</title>
+        <meta name="description" content="Ver y agregar comentarios a un evento" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Agregar Comentario</h1>
+        <h1 className={styles.title}>Comentarios</h1>
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <label>
@@ -57,9 +79,17 @@ const Comment: NextPage = () => {
           </label>
           <button type="submit" className={styles.button}>Agregar Comentario</button>
         </form>
+
+        <div className={styles.comments}>
+          {comments.map(comment => (
+            <div key={comment._id} className={styles.comment}>
+              <p>{comment.texto}</p>
+            </div>
+          ))}
+        </div>
       </main>
     </div>
   );
 };
 
-export default Comment;
+export default Comments;
