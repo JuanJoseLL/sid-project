@@ -1,6 +1,14 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 
+
+
+class Lugar {
+  @Prop({ required: true })
+  lugar: string;
+}
+
+
 @Schema()
 export class Event extends Document {
   @Prop({ required: true })
@@ -14,9 +22,6 @@ export class Event extends Document {
 
   @Prop({ required: true })
   fecha: Date;
-
-  @Prop({ required: true })
-  lugar: string;
 
   @Prop({ required: true })
   asistentes: string[];

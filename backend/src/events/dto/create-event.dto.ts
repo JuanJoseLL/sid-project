@@ -1,5 +1,12 @@
 import { IsString, IsArray, IsDateString } from 'class-validator';
 
+
+class LugarDTO {
+  @IsString()
+  lugar: string;
+}
+
+
 export class CreateEventDto {
   @IsString()
   titulo: string;
@@ -13,9 +20,6 @@ export class CreateEventDto {
 
   @IsDateString()
   fecha: string;
-
-  @IsString()
-  lugar: string;
 
   @IsArray()
   @IsString({ each: true })
