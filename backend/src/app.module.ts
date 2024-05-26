@@ -7,6 +7,7 @@ import { EventModule } from './events/event.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CommentModule } from './comments/comment.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         isGlobal: true, 
     }),
     EventModule,
+    ConfigModule,
     MongooseModule.forRoot('mongodb+srv://Juan:juan@cluster01.jh82oxj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster01')
     
   ],

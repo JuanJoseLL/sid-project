@@ -29,7 +29,4 @@ export class CreateEventDto {
   @IsString({ each: true })
   facultades_organizadoras: string[];
 
-  @IsArray()
-  @IsString({ each: true })
-  comentarios: string[];
 }

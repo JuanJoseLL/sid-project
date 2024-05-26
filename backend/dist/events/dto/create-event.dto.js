@@ -50,9 +50,4 @@ __decorate([
     (0, class_validator_1.IsString)({ each: true }),
     __metadata("design:type", Array)
 ], CreateEventDto.prototype, "facultades_organizadoras", void 0);
-__decorate([
-    (0, class_validator_1.IsArray)(),
-    (0, class_validator_1.IsString)({ each: true }),
-    __metadata("design:type", Array)
-], CreateEventDto.prototype, "comentarios", void 0);
 //# sourceMappingURL=create-event.dto.js.map

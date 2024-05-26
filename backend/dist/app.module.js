@@ -14,6 +14,7 @@ const cache_manager_1 = require("@nestjs/cache-manager");
 const cache_manager_redis_yet_1 = require("cache-manager-redis-yet");
 const event_module_1 = require("./events/event.module");
 const mongoose_1 = require("@nestjs/mongoose");
+const config_1 = require("@nestjs/config");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -26,6 +27,7 @@ exports.AppModule = AppModule = __decorate([
                 isGlobal: true,
             }),
             event_module_1.EventModule,
+            config_1.ConfigModule,
             mongoose_1.MongooseModule.forRoot('mongodb+srv://Juan:juan@cluster01.jh82oxj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster01')
         ],
         controllers: [app_controller_1.AppController],

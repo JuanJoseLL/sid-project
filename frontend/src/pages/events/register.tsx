@@ -89,10 +89,6 @@ const Register: NextPage = () => {
             Facultades Organizadoras:
             <input type="text" value={organizingFaculties} onChange={(e) => setOrganizingFaculties(e.target.value)} />
           </label>
-          <label>
-            Comentarios:
-            <textarea value={comments} onChange={(e) => setComments(e.target.value)} />
-          </label>
           <button type="submit" className={styles.button}>Registrar Evento</button>
         </form>
       </main>

@@ -5,4 +5,5 @@ export declare class EventController {
     constructor(eventService: EventService);
     create(createEventDto: CreateEventDto): Promise<import("./event.schema").Event>;
     findAll(): Promise<import("./event.schema").Event[]>;
+    findOne(id: string): Promise<import("./event.schema").Event>;
 }

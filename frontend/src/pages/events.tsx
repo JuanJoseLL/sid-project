@@ -49,6 +49,9 @@ const Events: NextPage = () => {
                   <p>{event.lugar}</p>
                 </div>
               </Link>
+              <Link href={`/comments/${event._id}`}>
+                <button className={styles.button}>Agregar Comentario</button>
+              </Link>
             </li>
           ))}
         </ul>

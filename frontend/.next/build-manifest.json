@@ -12,6 +12,11 @@
   ],
   "rootMainFiles": [],
   "pages": {
+    "/": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/index.js"
+    ],
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -22,15 +27,30 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
+    "/attendees": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/attendees.js"
+    ],
+    "/attendees/register": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/attendees/register.js"
+    ],
+    "/comments/[id]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/comments/[id].js"
+    ],
     "/events": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/events.js"
     ],
-    "/events/[id]": [
+    "/events/register": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/events/[id].js"
+      "static/chunks/pages/events/register.js"
     ]
   },
   "ampFirstPages": []

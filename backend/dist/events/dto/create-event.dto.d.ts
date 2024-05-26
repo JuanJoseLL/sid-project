@@ -7,5 +7,4 @@ export declare class CreateEventDto {
     asistentes: string[];
     conferencistas: string[];
     facultades_organizadoras: string[];
-    comentarios: string[];
 }

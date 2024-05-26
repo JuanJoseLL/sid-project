@@ -29,6 +29,9 @@ let EventService = class EventService {
     async findAll() {
         return this.eventModel.find().exec();
     }
+    async findOne(id) {
+        return this.eventModel.findById(id).exec();
+    }
 };
 exports.EventService = EventService;
 exports.EventService = EventService = __decorate([
