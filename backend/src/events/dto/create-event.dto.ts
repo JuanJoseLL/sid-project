@@ -1,4 +1,3 @@
-
 import { IsString, IsArray, IsDateString } from 'class-validator';
 
 export class CreateEventDto {
@@ -29,4 +28,8 @@ export class CreateEventDto {
   @IsArray()
   @IsString({ each: true })
   facultades_organizadoras: string[];
+
+  @IsArray()
+  @IsString({ each: true })
+  comentarios: string[];
 }

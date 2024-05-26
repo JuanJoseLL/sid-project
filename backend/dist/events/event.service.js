@@ -26,6 +26,9 @@ let EventService = class EventService {
         const createdEvent = new this.eventModel(createEventDto);
         return createdEvent.save();
     }
+    async findAll() {
+        return this.eventModel.find().exec();
+    }
 };
 exports.EventService = EventService;
 exports.EventService = EventService = __decorate([

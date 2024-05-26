@@ -1,5 +1,4 @@
-// src/events/event.controller.ts
-import { Controller, Post, Body, BadRequestException } from '@nestjs/common';
+import { Controller, Post, Body, BadRequestException, Get } from '@nestjs/common';
 import { EventService } from './event.service';
 import { CreateEventDto } from './dto/create-event.dto';
 
@@ -9,7 +8,12 @@ export class EventController {
 
   @Post()
   async create(@Body() createEventDto: CreateEventDto) {
-    console.log('Received DTO:', createEventDto);
+    console.log('Received DTO:', createEventDto); 
     return await this.eventService.create(createEventDto);
+  }
+
+  @Get()
+  async findAll() {
+    return await this.eventService.findAll();
   }
 }

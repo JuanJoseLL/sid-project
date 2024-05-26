@@ -30,4 +30,5 @@ export declare class EventService {
     private eventModel;
     constructor(eventModel: Model<Event>);
     create(createEventDto: CreateEventDto): Promise<Event>;
+    findAll(): Promise<Event[]>;
 }

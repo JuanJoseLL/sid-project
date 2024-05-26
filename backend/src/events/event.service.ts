@@ -1,4 +1,3 @@
-// src/events/event.service.ts
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -13,5 +12,9 @@ export class EventService {
     console.log('Creating event with DTO:', createEventDto);
     const createdEvent = new this.eventModel(createEventDto);
     return createdEvent.save();
+  }
+
+  async findAll(): Promise<Event[]> {
+    return this.eventModel.find().exec();
   }
 }

@@ -24,6 +24,9 @@ let EventController = class EventController {
         console.log('Received DTO:', createEventDto);
         return await this.eventService.create(createEventDto);
     }
+    async findAll() {
+        return await this.eventService.findAll();
+    }
 };
 exports.EventController = EventController;
 __decorate([
@@ -33,6 +36,12 @@ __decorate([
     __metadata("design:paramtypes", [create_event_dto_1.CreateEventDto]),
     __metadata("design:returntype", Promise)
 ], EventController.prototype, "create", null);
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], EventController.prototype, "findAll", null);
 exports.EventController = EventController = __decorate([
     (0, common_1.Controller)('events'),
     __metadata("design:paramtypes", [event_service_1.EventService])
