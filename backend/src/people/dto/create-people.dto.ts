@@ -31,13 +31,4 @@ export class CreatePeopleDTO {
   @ValidateNested()
   @Type(() => CiudadDTO)
   ciudad: CiudadDTO;
-
-  @IsArray()
-  @IsString({ each: true })
-  conferencistas: string[];
-
-  @IsArray()
-  @IsString({ each: true })
-  facultades_organizadoras: string[];
-
 }
