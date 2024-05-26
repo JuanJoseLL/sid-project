@@ -1,4 +1,4 @@
-import { ValidateNested, IsString, IsArray, IsDateString } from 'class-validator';
+import { ValidateNested, IsString, IsArray, IsDateString, IsBoolean } from 'class-validator';
 import { Type } from 'class-transformer';
 
 class CiudadDTO {
@@ -20,7 +20,7 @@ export class CreatePeopleDTO {
   nombre_usuario: string;
 
   @IsString()
-  nomnbre_completo: string;
+  nombre_completo: string;
 
   @IsString()
   tipo_relacion: string;
@@ -31,4 +31,7 @@ export class CreatePeopleDTO {
   @ValidateNested()
   @Type(() => CiudadDTO)
   ciudad: CiudadDTO;
+
+  @IsBoolean()
+  es_empleado: boolean;
 }

@@ -21,7 +21,9 @@ export class PeopleService {
   }
 
   async findOne(id: string): Promise<People> {
-    return this.peopleModel.findById(id).exec();
+    const person = await this.peopleModel.findOne({ id }).exec();
+
+    return person;
   } 
 
 }
