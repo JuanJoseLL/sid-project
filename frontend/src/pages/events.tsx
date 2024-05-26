@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import styles from '../styles/Home.module.css';
+import styles from '../styles/Events.module.css';
 
 interface Event {
   _id: string;
@@ -39,9 +39,9 @@ const Events: NextPage = () => {
           <button className={styles.button}>Registrar Nuevo Evento</button>
         </Link>
 
-        <ul className={styles.list}>
+        <div className={styles.grid}>
           {events.map((event) => (
-            <li key={event._id} className={styles.listItem}>
+            <div key={event._id} className={styles.cardContainer}>
               <Link href={`/events/${event._id}`}>
                 <div className={styles.card}>
                   <h2>{event.titulo}</h2>
@@ -50,11 +50,15 @@ const Events: NextPage = () => {
                 </div>
               </Link>
               <Link href={`/comments/${event._id}`}>
-                <button className={styles.button}>Agregar Comentario</button>
+                <button className={styles.commentButton}>Agregar Comentario</button>
               </Link>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
+        
+        <Link href="/">
+          <button className={styles.backButton}>Volver</button>
+        </Link>
       </main>
     </div>
   );

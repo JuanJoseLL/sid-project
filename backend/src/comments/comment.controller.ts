@@ -11,7 +11,7 @@ export class commentController {
   @Post(':id')
   async addComment(@Param('id') id: string, @Body() createCommentDto: CreateCommentDto) {
     createCommentDto.evento = id;
-    console.log("puta")
+    console.log("ewe")
     return  this.commentService.create(createCommentDto);
   }
 

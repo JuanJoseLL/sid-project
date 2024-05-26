@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
-import styles from '../../styles/Home.module.css';
+import Link from 'next/link';
+import styles from '../../styles/Register.module.css';
 import { createEvent } from '../../services/eventService';
 
 const Register: NextPage = () => {
@@ -14,8 +15,6 @@ const Register: NextPage = () => {
   const [facilitators, setFacilitators] = useState('');
   const [organizingFaculties, setOrganizingFaculties] = useState('');
   const [comments, setComments] = useState('');
-
-
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,7 +29,7 @@ const Register: NextPage = () => {
       facultades_organizadoras: organizingFaculties.split(','),
       comentarios: comments.split('\n')
     };
-  
+
     try {
       await createEvent(eventData);
       alert('Event registered successfully');
@@ -43,7 +42,6 @@ const Register: NextPage = () => {
       }
     }
   };
-  
 
   return (
     <div className={styles.container}>
@@ -59,38 +57,42 @@ const Register: NextPage = () => {
         <form onSubmit={handleSubmit} className={styles.form}>
           <label>
             Título:
-            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className={styles.input} />
           </label>
           <label>
             Descripción:
-            <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
+            <textarea value={description} onChange={(e) => setDescription(e.target.value)} className={styles.textarea} />
           </label>
           <label>
             Categorías:
-            <input type="text" value={categories} onChange={(e) => setCategories(e.target.value)} />
+            <input type="text" value={categories} onChange={(e) => setCategories(e.target.value)} className={styles.input} />
           </label>
           <label>
             Fecha:
-            <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+            <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className={styles.input} />
           </label>
           <label>
             Lugar:
-            <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} />
+            <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} className={styles.input} />
           </label>
           <label>
             Asistentes:
-            <input type="text" value={attendees} onChange={(e) => setAttendees(e.target.value)} />
+            <input type="text" value={attendees} onChange={(e) => setAttendees(e.target.value)} className={styles.input} />
           </label>
           <label>
             Facilitadores:
-            <input type="text" value={facilitators} onChange={(e) => setFacilitators(e.target.value)} />
+            <input type="text" value={facilitators} onChange={(e) => setFacilitators(e.target.value)} className={styles.input} />
           </label>
           <label>
             Facultades Organizadoras:
-            <input type="text" value={organizingFaculties} onChange={(e) => setOrganizingFaculties(e.target.value)} />
+            <input type="text" value={organizingFaculties} onChange={(e) => setOrganizingFaculties(e.target.value)} className={styles.input} />
           </label>
           <button type="submit" className={styles.button}>Registrar Evento</button>
         </form>
+
+        <Link href="/events">
+          <button className={styles.backButton}>Volver</button>
+        </Link>
       </main>
     </div>
   );

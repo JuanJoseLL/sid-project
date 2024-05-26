@@ -22,7 +22,7 @@ let commentController = class commentController {
     }
     async addComment(id, createCommentDto) {
         createCommentDto.evento = id;
-        console.log("puta");
+        console.log("ewe");
         return this.commentService.create(createCommentDto);
     }
     async getComments(id) {

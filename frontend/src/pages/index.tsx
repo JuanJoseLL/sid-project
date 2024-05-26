@@ -53,23 +53,11 @@ const Home: NextPage = () => {
           </Link>
         </div>
 
-        <div className={styles.context}>
-          <h1>Current Value: {value}</h1>
-          <button onClick={() => setValue('new value')}>Change Value</button>
-        </div>
+        
       </main>
 
       <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <img src="/nextjs.svg" alt="Next.js Logo" />
-          </span>
-        </a>
+      
       </footer>
     </div>
   );
