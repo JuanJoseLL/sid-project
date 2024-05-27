@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import styles from '../styles/Events.module.css';
+import { useRouter } from 'next/router';
 
 interface Event {
   _id: string;

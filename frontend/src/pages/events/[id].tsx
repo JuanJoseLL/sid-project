@@ -1,6 +1,8 @@
 import { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
 import styles from '../../styles/Home.module.css';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 interface Event {
   titulo: string;

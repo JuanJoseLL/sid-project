@@ -34,7 +34,11 @@ export class EventService {
     if (cachedEvent) {
       return cachedEvent;
     }
-    const event = await this.eventModel.findById(id).exec();
+    const event = await this.eventModel
+                  .findById(id)
+                  .populate('asistentes')
+                  .populate('comentarios')
+                  .exec();
     this.cacheManager.set('event', event)
     return event
      
