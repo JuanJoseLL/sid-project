@@ -23,8 +23,8 @@ export class Event extends Document {
   @Prop({ required: true })
   fecha: Date;
 
-  @Prop({ required: true })
-  asistentes: string[];
+  @Prop({ type: [{type: Types.ObjectId, ref: 'People'}] })
+  asistentes: Types.ObjectId[];
 
   @Prop({ required: true })
   conferencistas: string[];

@@ -36,10 +36,10 @@ import { PeopleModule } from './people/people.module';
     
   ],
   controllers: [AppController],
-  providers: [AppService, /*{
+  providers: [AppService, {
     provide: 'APP_INTERCEPTOR', // Aqui estamos definiendo que el interceptor de cache
     useClass: CacheInterceptor, // se aplique a todas las rutas de nuestra aplicación OJO solo metodo GET
     // La key de los datos en caché se generará a partir de la URL de la solicitud.
-  }*/],
+  }],
 })
 export class AppModule {}
