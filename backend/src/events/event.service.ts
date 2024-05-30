@@ -30,7 +30,7 @@ export class EventService {
   }
 
   async findOne(id: string) {
-    const cachedEvent = await this.cacheManager.get('event');
+    const cachedEvent = await this.cacheManager.get(`event_${id}`);
     if (cachedEvent) {
       return cachedEvent;
     }
@@ -39,7 +39,7 @@ export class EventService {
                   .populate('asistentes')
                   .populate('comentarios')
                   .exec();
-    this.cacheManager.set('event', event)
+    this.cacheManager.set(`event_${id}`, event)
     return event
      
   } 

@@ -30,12 +30,12 @@ export class PeopleService {
   }
 
   async findOne(id: string) {
-    const cachedPerson = await this.cacheManager.get('person');
+    const cachedPerson = await this.cacheManager.get(`person_${id}`);
     if (cachedPerson) {
       return cachedPerson;
     }
     const person = await this.peopleModel.findById(id).exec();
-    await this.cacheManager.set('person', person)
+    await this.cacheManager.set(`person_${id}`, person)
     return person;
   } 
 

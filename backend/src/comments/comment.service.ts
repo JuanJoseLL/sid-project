@@ -21,7 +21,7 @@ export class CommentService {
   }
 
   async findByEvent(eventId: string) {
-    const cacheComment = await this.cacheManager.get('comment');
+    const cacheComment = await this.cacheManager.get(`comment_${eventId}`);
     if (cacheComment) {
       return cacheComment;
     }
@@ -29,7 +29,7 @@ export class CommentService {
                                           .populate('evento')
                                           .populate('persona')
                                           .exec();
-    this.cacheManager.set('comment', comment)
+    this.cacheManager.set(`comment_${eventId}`, comment)
     return comment
    
   }
