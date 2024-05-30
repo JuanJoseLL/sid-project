@@ -50,7 +50,7 @@ const EventDetails: NextPage<{ event: Event | null }> = ({ event }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.params;
   try {
-    const response = await fetch(`http://localhost:4000/events/${id}`);
+    const response = await fetch(`http://localhost:3000/events/${id}`);
     if (!response.ok) {
       throw new Error(`Failed to fetch event: ${response.statusText}`);
     }

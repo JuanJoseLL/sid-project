@@ -16,7 +16,7 @@ const Events: NextPage = () => {
   const [events, setEvents] = useState<Event[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:4000/events')
+    fetch('http://localhost:3000/events')
       .then((response) => response.json())
       .then((data) => setEvents(data));
   }, []);

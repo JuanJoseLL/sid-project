@@ -32,23 +32,17 @@ const Home: NextPage = () => {
             </a>
           </Link>
 
-          <Link href="/attendees" legacyBehavior>
+          <Link href="/people" legacyBehavior>
             <a className={styles.card}>
               <h2>Asistentes &rarr;</h2>
               <p>Gestiona la lista de asistentes.</p>
             </a>
           </Link>
 
-          <Link href="/facilitators" legacyBehavior>
+          <Link href="/comment" legacyBehavior>
             <a className={styles.card}>
-              <h2>Facilitadores &rarr;</h2>
-              <p>Gestiona la lista de facilitadores.</p>
-            </a>
-          </Link>
-          <Link href="/places" legacyBehavior>
-            <a className={styles.card}>
-              <h2>Lugares &rarr;</h2>
-              <p>Gestiona la lista de lugares.</p>
+              <h2>Comentarios &rarr;</h2>
+              <p>Realiza un comentario sobre un evento.</p>
             </a>
           </Link>
         </div>
