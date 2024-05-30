@@ -41,7 +41,7 @@ export class EventService {
     return events
   }
 
-  async findOne(titulo: string): Promise<any> {
+  async findId(titulo: string): Promise<any> {
     const cachedEventId = await this.cacheManager.get<string>(`event_${titulo}`);
     if (cachedEventId) {
       return new ObjectId(cachedEventId);
@@ -57,6 +57,21 @@ export class EventService {
 
   async getFacultadId(name: string){
     return this.oracleService.executeQuery('SELECT CODIGO FROM P09779_1_2.FACULTADES WHERE NOMBRE = :name', [name]);
+  }
+
+  async findOne(id: string) {
+    const cachedEvent = await this.cacheManager.get('event');
+    if (cachedEvent) {
+      return cachedEvent;
+    }
+    const event = await this.eventModel
+                  .findById(id)
+                  .populate('asistentes')
+                  .populate('comentarios')
+                  .exec();
+    this.cacheManager.set('event', event)
+    return event
+     
   }
 
 }

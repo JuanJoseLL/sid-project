@@ -3,7 +3,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import styles from '../styles/Events.module.css';
-import { useRouter } from 'next/router';
 
 interface Event {
   _id: string;
@@ -16,10 +15,21 @@ const Events: NextPage = () => {
   const [events, setEvents] = useState<Event[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/events')
-      .then((response) => response.json())
-      .then((data) => setEvents(data));
+    fetchEventsFromBackend();
   }, []);
+
+  const fetchEventsFromBackend = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/events');
+      if (!response.ok) {
+        throw new Error('Failed to fetch events');
+      }
+      const data: Event[] = await response.json();
+      setEvents(data);
+    } catch (error) {
+      console.error('Error fetching events:', error);
+    }
+  };
 
   return (
     <div className={styles.container}>

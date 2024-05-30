@@ -45,6 +45,12 @@ const Home: NextPage = () => {
               <p>Realiza un comentario sobre un evento.</p>
             </a>
           </Link>
+          <Link href="/suggestions" legacyBehavior>
+            <a className={styles.card}>
+              <h2>Recomendaciones de Eventos &rarr;</h2>
+              <p>Accede para mirar los eventos sugeridos para una persona.</p>
+            </a>
+          </Link>
         </div>
 
         

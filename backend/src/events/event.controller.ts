@@ -21,8 +21,13 @@ export class EventController {
   }
 
   @Get(':titulo')
-  async findOne(@Param('titulo') titulo: string) {
-    return await this.eventService.findOne(titulo);
+  async findId(@Param('titulo') titulo: string) {
+    return await this.eventService.findId(titulo);
+  }
+
+  @Get(':id')
+  async findOne(@Param('id') id: string) {
+    return await this.eventService.findOne(id);
   }
 
 }
