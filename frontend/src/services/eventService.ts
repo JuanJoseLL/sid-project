@@ -1,5 +1,5 @@
 export const createEvent = async (eventData: any) => {
-    const response = await fetch('http://localhost:4000/events', {
+    const response = await fetch('http://localhost:3000/events', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

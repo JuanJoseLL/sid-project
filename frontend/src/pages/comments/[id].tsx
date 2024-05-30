@@ -13,7 +13,7 @@ const Comments: NextPage = () => {
 
   const fetchComments = async () => {
     try {
-      const response = await fetch(`http://localhost:4000/comments/event/${id}`);
+      const response = await fetch(`http://localhost:3000/comments/event/${id}`);
       if (!response.ok) {
         throw new Error('Failed to fetch comments');
       }
@@ -40,7 +40,7 @@ const Comments: NextPage = () => {
     };
 
     try {
-      const response = await fetch(`http://localhost:4000/comments/${id}`, {
+      const response = await fetch(`http://localhost:3000/comments/${id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,15 +49,15 @@ const Comments: NextPage = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to add comment');
+        throw new Error('Error al agregar comentario.');
       }
 
-      alert('Comment added successfully');
+      alert('Comentario agregado exitosamente.');
       setTexto('');
-      fetchComments(); // Refrescar la lista de comentarios después de añadir uno nuevo
+      fetchComments(); 
     } catch (error) {
       console.error('Error:', error);
-      alert('Failed to add comment');
+      alert('Error al agregar comentario');
     }
   };
 

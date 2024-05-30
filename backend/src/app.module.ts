@@ -9,6 +9,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CommentModule } from './comments/comment.module';
 import { PeopleModule } from './people/people.module';
+import * as oracledb from 'oracledb';
 
 oracledb.initOracleClient({ libDir: 'C:\\instantclient_21_13' });
 

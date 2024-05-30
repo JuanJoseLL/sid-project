@@ -1,5 +1,5 @@
 /* src/styles/Register.module.css */
-.container {
+  .container {
     min-height: 100vh;
     padding: 0 2rem;
     display: flex;
@@ -52,6 +52,13 @@
     border-radius: 5px;
     margin-top: 0.5rem;
   }
+
+  .select {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 0.5rem;
+  }
   
   .textarea {
     resize: vertical;
@@ -88,4 +95,22 @@
   .backButton:hover {
     background-color: #cc3700;
   }
+
+  .employeeContainer {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .employeeContainer label {
+    display: flex;
+    align-items: center;
+  }
+  
+  .employeeContainer input[type="checkbox"] {
+    margin-left: 10px;
+  }
+
+  
   
