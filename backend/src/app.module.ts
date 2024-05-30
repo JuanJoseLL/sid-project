@@ -1,16 +1,18 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CacheInterceptor, CacheModule, CacheModuleOptions } from '@nestjs/cache-manager';
+import { CacheInterceptor, CacheModule } from '@nestjs/cache-manager';
 import { redisStore } from 'cache-manager-redis-yet';
 import { EventModule } from './events/event.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CommentModule } from './comments/comment.module';
 import { PeopleModule } from './people/people.module';
 import * as oracledb from 'oracledb';
+import { OracleModule } from './oracle/oracle.module';
 
+// Inicializa el cliente Oracle una vez
 oracledb.initOracleClient({ libDir: 'C:\\instantclient_21_13' });
 
 @Module({
@@ -22,7 +24,7 @@ oracledb.initOracleClient({ libDir: 'C:\\instantclient_21_13' });
       password: 'MFQHqFMxVp',
       synchronize: true,
       logging: true,
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      entities: [__dirname + '/*/.entity{.ts,.js}'],
     }),
     CacheModule.register({
         store: redisStore,
@@ -33,14 +35,22 @@ oracledb.initOracleClient({ libDir: 'C:\\instantclient_21_13' });
     PeopleModule,
     ConfigModule,
     CommentModule,
-    MongooseModule.forRoot('mongodb+srv://Juan:juan@cluster01.jh82oxj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster01')
-    
+    MongooseModule.forRoot('mongodb+srv://Juan:juan@cluster01.jh82oxj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster01'),
+    forwardRef(() => OracleModule) // Usar forwardRef para evitar dependencias circulares
   ],
   controllers: [AppController],
-  providers: [AppService, {
-    provide: 'APP_INTERCEPTOR', // Aqui estamos definiendo que el interceptor de cache
-    useClass: CacheInterceptor, // se aplique a todas las rutas de nuestra aplicación OJO solo metodo GET
-    // La key de los datos en caché se generará a partir de la URL de la solicitud.
-  }],
+  providers: [
+    AppService,
+    {
+      provide: 'APP_INTERCEPTOR', // Aqui estamos definiendo que el interceptor de cache
+      useClass: CacheInterceptor, // se aplique a todas las rutas de nuestra aplicación OJO solo metodo GET
+      // La key de los datos en caché se generará a partir de la URL de la solicitud.
+    },
+    {
+      provide: 'ORACLE_CLIENT',
+      useValue: oracledb, // Proporcionar el cliente Oracle como un valor
+    },
+  ],
+  exports: ['ORACLE_CLIENT'], // Exportar el cliente Oracle para que esté disponible en otros módulos
 })
 export class AppModule {}

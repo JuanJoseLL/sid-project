@@ -25,5 +25,4 @@ export class EventController {
     return await this.eventService.findOne(id);
   }
 
-
 }
