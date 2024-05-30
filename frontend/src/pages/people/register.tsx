@@ -7,33 +7,34 @@ import { createPerson } from '../../services/peopleService';
 
 const RegisterPerson: NextPage = () => {
   const [id, setId] = useState('');
-  const [username, setUsername] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [relationType, setRelationType] = useState('');
+  const [nombre_usuario, setNombreUsuario] = useState('');
+  const [nombre_completo, setNombreCompleto] = useState('');
+  const [tipo_relacion, setTipoRelacion] = useState('');
   const [email, setEmail] = useState('');
-  const [cityName, setCityName] = useState('');
-  const [cityDepartment, setCityDepartment] = useState('');
-  const [cityCountry, setCityCountry] = useState('');
-  const [isEmployee, setIsEmployee] = useState(false);
+  const [nombre_ciudad, setNombreCiudad] = useState('');
+  const [departamento_ciudad, setDepartamentoCiudad] = useState('');
+  const [pais_ciudad, setPaisCiudad] = useState('');
+  const [es_empleado, setEsEmpleado] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const personData = {
+    const datosPersona = {
       id,
-      username,
-      fullName,
-      relationType,
+      nombre_usuario,
+      nombre_completo,
+      tipo_relacion,
       email,
-      city: {
-        name: cityName,
-        department: cityDepartment,
-        country: cityCountry,
+      ciudad: {
+        nombre: nombre_ciudad,
+        departamento: departamento_ciudad,
+        pais: pais_ciudad,
       },
-      isEmployee,
+      es_empleado,
     };
 
     try {
-      await createPerson(personData);
+      console.log(datosPersona);
+      await createPerson(datosPersona);
       alert('Persona registrada exitosamente');
     } catch (error) {
       console.error('Error al registrar la persona', error);
@@ -59,22 +60,22 @@ const RegisterPerson: NextPage = () => {
           </label>
           <label>
             Nombre de Usuario:
-            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+            <input type="text" value={nombre_usuario} onChange={(e) => setNombreUsuario(e.target.value)} required />
           </label>
           <label>
             Nombre Completo:
-            <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} required />
+            <input type="text" value={nombre_completo} onChange={(e) => setNombreCompleto(e.target.value)} required />
           </label>
           <label>
             Tipo de Relación:
-            <select value={relationType} onChange={(e) => setRelationType(e.target.value)} required>
+            <select value={tipo_relacion} onChange={(e) => setTipoRelacion(e.target.value)} required>
               <option value="">Seleccionar Tipo de Relación</option>
-              <option value="student">Profesor</option>
-              <option value="faculty">Estudiante</option>
-              <option value="staff">Graduado</option>
-              <option value="staff">Empresario</option>
-              <option value="staff">Administrativo</option>
-              <option value="staff">Directivo</option>
+              <option value="Profesor">Profesor</option>
+              <option value="Estudiante">Estudiante</option>
+              <option value="Graduado">Graduado</option>
+              <option value="Empresario">Empresario</option>
+              <option value="Administrativo">Administrativo</option>
+              <option value="Directivo">Directivo</option>
             </select>
           </label>
           <label>
@@ -85,21 +86,21 @@ const RegisterPerson: NextPage = () => {
             <legend>Ciudad:</legend>
             <label>
               Nombre:
-              <input type="text" value={cityName} onChange={(e) => setCityName(e.target.value)} required />
+              <input type="text" value={nombre_ciudad} onChange={(e) => setNombreCiudad(e.target.value)} required />
             </label>
             <label>
               Departamento:
-              <input type="text" value={cityDepartment} onChange={(e) => setCityDepartment(e.target.value)} required />
+              <input type="text" value={departamento_ciudad} onChange={(e) => setDepartamentoCiudad(e.target.value)} required />
             </label>
             <label>
               País:
-              <input type="text" value={cityCountry} onChange={(e) => setCityCountry(e.target.value)} required />
+              <input type="text" value={pais_ciudad} onChange={(e) => setPaisCiudad(e.target.value)} required />
             </label>
           </fieldset>
           <div className={styles.employeeContainer}>
             <label>
               <span>¿Es Empleado? ‎ ‎ ‎
-                <input type="checkbox" checked={isEmployee} onChange={(e) => setIsEmployee(e.target.checked)} />
+                <input type="checkbox" checked={es_empleado} onChange={(e) => setEsEmpleado(e.target.checked)} />
               </span>
             </label>
           </div>

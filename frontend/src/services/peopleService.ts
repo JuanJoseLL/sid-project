@@ -1,5 +1,5 @@
 export const getPeople = async () => {
-  const response = await fetch('http://localhost:3000/people');
+  const response = await fetch('http://localhost:4000/people');
   if (!response.ok) {
     throw new Error('Failed to fetch people');
   }
@@ -7,7 +7,7 @@ export const getPeople = async () => {
 };
 
 export const createPerson = async (personData: any) => {
-  const response = await fetch('http://localhost:3000/people', {
+  const response = await fetch('http://localhost:4000/people', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

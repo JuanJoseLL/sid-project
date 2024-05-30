@@ -3,16 +3,16 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { NextPage } from 'next';
 import styles from '../styles/Register.module.css';
-import { fetchCommentsByEvent, createComment, fetchEvents } from '../services/commentServive';
+import { fetchCommentsByEvent, createComment, fetchEvents, fetchPeople } from '../services/commentService';
 
 interface Event {
   _id: string;
   titulo: string;
 }
 
-interface Comment {
+interface Person {
   _id: string;
-  texto: string;
+  nombre_completo: string;
 }
 
 const Comments: NextPage = () => {
@@ -22,17 +22,19 @@ const Comments: NextPage = () => {
   const [texto, setTexto] = useState('');
   const [comments, setComments] = useState<Comment[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
-  const [selectedEvent, setSelectedEvent] = useState<string>('');
-  const [personId, setPersonId] = useState<string>('');
+  const [people, setPeople] = useState<Person[]>([]);
+  const [selectedEventId, setSelectedEventId] = useState<string>('');
+  const [selectedPersonId, setSelectedPersonId] = useState<string>('');
 
   useEffect(() => {
-    if (selectedEvent) {
-      fetchCommentsByEvent(selectedEvent).then(setComments).catch(console.error);
+    if (selectedEventId) {
+      fetchCommentsByEvent(selectedEventId).then(setComments).catch(console.error);
     }
-  }, [selectedEvent]);
+  }, [selectedEventId]);
 
   useEffect(() => {
     fetchEvents().then(setEvents).catch(console.error);
+    fetchPeople().then(setPeople).catch(console.error);
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -40,16 +42,16 @@ const Comments: NextPage = () => {
 
     const commentData = {
       texto,
-      evento: selectedEvent,
-      persona: personId,
+      evento: selectedEventId,
+      persona: selectedPersonId,
     };
 
     try {
-      await createComment(commentData);
+      await createComment(selectedEventId, commentData);
       alert('Comentario agregado exitosamente.');
       setTexto('');
-      if (selectedEvent) {
-        fetchCommentsByEvent(selectedEvent).then(setComments).catch(console.error);
+      if (selectedEventId) {
+        fetchCommentsByEvent(selectedEventId).then(setComments).catch(console.error);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -74,12 +76,17 @@ const Comments: NextPage = () => {
             <textarea value={texto} onChange={(e) => setTexto(e.target.value)} required className={styles.textarea} />
           </label>
           <label>
-            ID de la Persona:
-            <input type="text" value={personId} onChange={(e) => setPersonId(e.target.value)} required className={styles.input} />
+            Seleccionar Persona:
+            <select value={selectedPersonId} onChange={(e) => setSelectedPersonId(e.target.value)} required className={styles.select}>
+              <option value="">Seleccionar Persona</option>
+              {people.map(person => (
+                <option key={person._id} value={person._id}>{person.nombre_completo}</option>
+              ))}
+            </select>
           </label>
           <label>
             Seleccionar Evento:
-            <select value={selectedEvent} onChange={(e) => setSelectedEvent(e.target.value)} required className={styles.select}>
+            <select value={selectedEventId} onChange={(e) => setSelectedEventId(e.target.value)} required className={styles.select}>
               <option value="">Seleccionar Evento</option>
               {events.map(event => (
                 <option key={event._id} value={event._id}>{event.titulo}</option>

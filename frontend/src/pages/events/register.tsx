@@ -1,36 +1,71 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../../styles/Register.module.css';
-import { createEvent } from '../../services/eventService';
+import { createEvent, getPeople } from '../../services/eventService'; // Asumiendo que tienes funciones para obtener la lista de asistentes y facilitadores desde el backend
 
 const Register: NextPage = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [categories, setCategories] = useState('');
+  const [categories, setCategories] = useState<string[]>([]);
   const [date, setDate] = useState('');
-  const [location, setLocation] = useState('');
-  const [attendees, setAttendees] = useState('');
-  const [facilitators, setFacilitators] = useState('');
-  const [organizingFaculties, setOrganizingFaculties] = useState('');
-  const [comments, setComments] = useState('');
+  const [locationName, setLocationName] = useState('');
+  const [locationAddress, setLocationAddress] = useState('');
+  const [cityName, setCityName] = useState('');
+  const [cityDepartment, setCityDepartment] = useState('');
+  const [cityCountry, setCityCountry] = useState('');
+  const [selectedAttendees, setSelectedAttendees] = useState<string[]>([]);
+  const [selectedFacilitators, setSelectedFacilitators] = useState<string[]>([]);
+  const [organizingFaculties, setOrganizingFaculties] = useState<string[]>([]);
+  const [attendees, setAttendees] = useState<string[]>([]);
+  const [facilitators, setFacilitators] = useState<string[]>([]);
+
+  useEffect(() => {
+    const fetchAttendees = async () => {
+      try {
+        const attendeesList = await getPeople();
+        setAttendees(attendeesList);
+      } catch (error) {
+        console.error('Error fetching attendees:', error);
+      }
+    };
+
+    const fetchFacilitators = async () => {
+      try {
+        const facilitatorsList = await getPeople();
+        setFacilitators(facilitatorsList);
+      } catch (error) {
+        console.error('Error fetching facilitators:', error);
+      }
+    };
+
+    fetchAttendees();
+    fetchFacilitators();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const eventData = {
       titulo: title,
       descripcion: description,
-      categorias: categories.split(','),
+      categorias: categories,
       fecha: date,
-      lugar: location,
-      asistentes: attendees.split(','),
-      conferencistas: facilitators.split(','),
-      facultades_organizadoras: organizingFaculties.split(','),
-      comentarios: comments.split('\n')
+      lugar: {
+        nombre: locationName,
+        direccion: locationAddress,
+        ciudad: {
+          nombre: cityName,
+          departamento: cityDepartment,
+          pais: cityCountry,
+        },
+      },
+      asistentes: selectedAttendees,
+      conferencistas: selectedFacilitators,
+      facultades_organizadoras: organizingFaculties,
     };
-
     try {
+      console.log(eventData);
       await createEvent(eventData);
       alert('Event registered successfully');
     } catch (error) {
@@ -65,31 +100,93 @@ const Register: NextPage = () => {
           </label>
           <label>
             Categorías:
-            <input type="text" value={categories} onChange={(e) => setCategories(e.target.value)} className={styles.input} />
+            <select
+              value={categories}
+              onChange={(e) => setCategories(Array.from(e.target.selectedOptions, option => option.value))}
+              multiple
+              className={styles.select}
+            >
+              <option value="artistico">Artístico</option>
+              <option value="informativo">Informativo</option>
+              <option value="laboral">Laboral</option>
+            </select>
           </label>
           <label>
             Fecha:
             <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className={styles.input} />
           </label>
-          <label>
-            Lugar:
-            <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} className={styles.input} />
-          </label>
+          <fieldset>
+            <legend>Lugar</legend>
+            <label>
+              Nombre:
+              <input type="text" value={locationName} onChange={(e) => setLocationName(e.target.value)} className={styles.input} />
+            </label>
+            <label>
+              Dirección:
+              <input type="text" value={locationAddress} onChange={(e) => setLocationAddress(e.target.value)} className={styles.input} />
+            </label>
+            <fieldset>
+              <legend>Ciudad</legend>
+              <label>
+                Nombre:
+                <input type="text" value={cityName} onChange={(e) => setCityName(e.target.value)} className={styles.input} />
+              </label>
+              <label>
+                Departamento:
+                <input type="text" value={cityDepartment} onChange={(e) => setCityDepartment(e.target.value)} className={styles.input} />
+              </label>
+              <label>
+                País:
+                <input type="text" value={cityCountry} onChange={(e) => setCityCountry(e.target.value)} className={styles.input} />
+              </label>
+            </fieldset>
+          </fieldset>
           <label>
             Asistentes:
-            <input type="text" value={attendees} onChange={(e) => setAttendees(e.target.value)} className={styles.input} />
+            <select
+              value={selectedAttendees}
+              onChange={(e) => setSelectedAttendees(Array.from(e.target.selectedOptions, option => option.value))}
+              multiple
+              className={styles.select}
+            >
+              {attendees.map(attendee => (
+                <option key={attendee} value={attendee}>
+                  {attendee}
+                </option>
+              ))}
+            </select>
           </label>
           <label>
             Facilitadores:
-            <input type="text" value={facilitators} onChange={(e) => setFacilitators(e.target.value)} className={styles.input} />
+            <select
+              value={selectedFacilitators}
+              onChange={(e) => setSelectedFacilitators(Array.from(e.target.selectedOptions, option => option.value))}
+              multiple
+              className={styles.select}
+            >
+              {facilitators.map(facilitator => (
+                <option key={facilitator} value={facilitator}>
+                  {facilitator}
+                </option>
+              ))}
+            </select>
           </label>
           <label>
             Facultades Organizadoras:
-            <input type="text" value={organizingFaculties} onChange={(e) => setOrganizingFaculties(e.target.value)} className={styles.input} />
+            <select
+              value={organizingFaculties}
+              onChange={(e) => setOrganizingFaculties(Array.from(e.target.selectedOptions, option => option.value))}
+              multiple
+              className={styles.select}
+            >
+              <option value="INGENIERIA">INGENIERIA</option>
+              <option value="NEGOCIOS Y ECONOMIA">NEGOCIOS Y ECONOMÍA</option>
+              <option value="CIENCIAS DE LA SALUD">CIENCIAS DE LA SALUD</option>
+              <option value="CIENCIAS HUMANAS">CIENCIAS HUMANAS</option>
+            </select>
           </label>
           <button type="submit" className={styles.button}>Registrar Evento</button>
         </form>
-
         <Link href="/events">
           <button className={styles.backButton}>Volver</button>
         </Link>
@@ -99,3 +196,4 @@ const Register: NextPage = () => {
 };
 
 export default Register;
+

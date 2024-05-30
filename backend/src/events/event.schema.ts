@@ -1,13 +1,30 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 
-
-
-class Lugar {
+class Ciudad {
   @Prop({ required: true })
-  lugar: string;
+  nombre: string;
+
+  @Prop({ required: true })
+  departamento: string;
+
+  @Prop({ required: true })
+  pais: string;
 }
 
+@Schema()
+export class Lugar extends Document {
+  @Prop({ required: true })
+  nombre: string;
+
+  @Prop({ required: true })
+  direccion: string;
+
+  @Prop({ type: Ciudad, required: true })
+  ciudad: Ciudad;
+}
+
+export const LugarSchema = SchemaFactory.createForClass(Lugar);
 
 @Schema()
 export class Event extends Document {
@@ -23,17 +40,17 @@ export class Event extends Document {
   @Prop({ required: true })
   fecha: Date;
 
-  @Prop({ type: [{type: Types.ObjectId, ref: 'People'}] })
-  asistentes: Types.ObjectId[];
+  @Prop({ type: Lugar, required: true })
+  lugar: Lugar;
+
+  @Prop({ required: true })
+  asistentes: string[];
 
   @Prop({ required: true })
   conferencistas: string[];
 
   @Prop({ required: true })
   facultades_organizadoras: string[];
-
-  @Prop({ type: [{ type: Types.ObjectId, ref: 'Comment' }] })
-  comentarios?: Types.ObjectId[];
 }
 
 export const EventSchema = SchemaFactory.createForClass(Event);

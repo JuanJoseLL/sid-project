@@ -18,9 +18,9 @@ export class PeopleController {
     return await this.peopleService.findAll();
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: string) {
-    return await this.peopleService.findOne(id);
+  @Get(':nombre_completo')
+  async findOne(@Param('nombre_completo') nombre_completo: string) {
+    return await this.peopleService.findOne(nombre_completo);
   }
 
 
